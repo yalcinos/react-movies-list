@@ -1,12 +1,13 @@
 const searchBarStyle = (theme) => ({
   formControl: {
+    margin: theme.spacing(1),
     minWidth: 120,
   },
   selectEmpty: {
-    marginTop: "1.5em",
+    marginTop: theme.spacing(2),
   },
   boxPosition: {
-    marginRight: "20%",
+    marginRight: "5%",
   },
 });
 
