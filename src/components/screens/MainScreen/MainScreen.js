@@ -14,9 +14,23 @@ import Header from "../../PageItems/Header/Header";
 class TabScreen extends Component {
   state = {
     value: 0,
+    movieData: {},
+    movies: [],
+    isloading: true,
   };
+  moviesCategory = ["now_playing", "popular", "top_rated", "upcoming"];
+  tvShowCategory = ["airing_today", "on_the_air", "popular", "top_rated"];
+
   componentDidMount() {
-    getMovieList();
+    this.fetchMovies();
+  }
+
+  async fetchMovies() {
+    const response = await getMovieList();
+    console.log(response);
+    this.setState({
+      movies: response,
+    });
   }
   handleChange = (event, newValue) => {
     this.setState({ value: newValue });
@@ -29,8 +43,9 @@ class TabScreen extends Component {
   };
 
   render() {
+    const { value, movieData, movies, isLoading, dropDownData } = this.state;
     const { classes } = this.props;
-    const { value } = this.state;
+    console.log(this.state);
     return (
       <div className={classes.root}>
         <Header headLine="React Movie Apps" />
@@ -46,9 +61,19 @@ class TabScreen extends Component {
             <Tab label="TV SHOWS" {...this.a11yProps(2)} />
           </Tabs>
         </AppBar>
-        <TabContainer value={value} index={0}></TabContainer>
+        <TabContainer
+          dropDownData={this.moviesCategory}
+          value={value}
+          index={0}
+          hasCategoryBar={true}
+        ></TabContainer>
         <TabContainer value={value} index={1}></TabContainer>
-        <TabContainer value={value} index={2}></TabContainer>
+        <TabContainer
+          dropDownData={this.tvShowCategory}
+          value={value}
+          index={2}
+          hasCategoryBar={true}
+        ></TabContainer>
       </div>
     );
   }

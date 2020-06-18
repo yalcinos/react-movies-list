@@ -10,7 +10,7 @@ import searchBarStyle from "./searchBarstyle";
 class SearchBar extends React.Component {
   render() {
     const { classes } = this.props;
-    console.log(this.props.classes);
+    // console.log(this.props.classes);
     return (
       <div>
         <TextField
@@ -20,12 +20,14 @@ class SearchBar extends React.Component {
           className={classes.boxPosition}
         />
         <FormControl variant="outlined">
-          <InputLabel htmlFor="outlined-age-native-simple">Age</InputLabel>
+          <InputLabel htmlFor="outlined-age-native-simple">
+            Search Types
+          </InputLabel>
           <Select
             native
-            label="Age"
+            label="Search Types"
             inputProps={{
-              name: "age",
+              name: "Type",
               id: "outlined-age-native-simple",
             }}
           >

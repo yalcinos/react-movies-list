@@ -7,6 +7,9 @@ export const getMovieList = async () => {
         api_key: API_KEY,
       },
     });
-    console.log(response.data.results);
-  } catch (error) {}
+    const movies = response.data.results;
+    return movies;
+  } catch (error) {
+    throw error;
+  }
 };
