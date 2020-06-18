@@ -1,19 +1,23 @@
-// Main View of Applucation
 import React, { Component } from "react";
-import Header from "../Header/Header";
-import SearchBarContainer from "../SearchContainer/SearchContainer";
+
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import AppBar from "@material-ui/core/AppBar";
-import TabContainer from "../../containers/TabContainer";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./mainScreenStyle";
+import { getMovieList } from "../../../api/api";
+//Import Components
+import SearchBarContainer from "../../PageItems/SearchContainer/SearchContainer";
+import TabContainer from "../../containers/TabContainer";
+import Header from "../../PageItems/Header/Header";
 
 class TabScreen extends Component {
   state = {
     value: 0,
   };
-
+  componentDidMount() {
+    getMovieList();
+  }
   handleChange = (event, newValue) => {
     this.setState({ value: newValue });
   };
