@@ -8,7 +8,7 @@ import MovieDetail from "./MovieDetail";
 import CategoryBar from "../PageItems/CategoryBar/CategoryBar";
 
 const MovieList = (props) => {
-  const { classes, children, movies, hasCategoryBar, dropDownData } = props;
+  const { classes, children, movies, hasCategoryBar, index } = props;
   console.log(movies);
 
   return (
@@ -20,7 +20,10 @@ const MovieList = (props) => {
               <MovieImage className={classes.image} children={children} />
             </Grid>
             <Grid item xs={12} sm container>
-              <Grid item xs container direction="column" spacing={3}></Grid>
+              <Grid item xs container direction="column" spacing={3}>
+                {" "}
+                Hi~!
+              </Grid>
             </Grid>
           </Grid>
         </Paper>
@@ -40,7 +43,11 @@ const MovieList = (props) => {
                     </Grid>
                     <Grid item xs={12} sm container>
                       <Grid item xs container direction="column" spacing={3}>
-                        <MovieDetail key={data.popularity} movieData={data} />
+                        <MovieDetail
+                          key={data.popularity}
+                          movieData={data}
+                          index={index}
+                        />
                       </Grid>
                     </Grid>
                   </Grid>

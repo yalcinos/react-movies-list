@@ -5,7 +5,7 @@ import Tab from "@material-ui/core/Tab";
 import AppBar from "@material-ui/core/AppBar";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./mainScreenStyle";
-import { getMovieList } from "../../../api/api";
+import { getMovieList, getTvShowList } from "../../../api/api";
 //Import Components
 import SearchBarContainer from "../../PageItems/SearchContainer/SearchContainer";
 import TabContainer from "../../containers/TabContainer";
@@ -20,18 +20,31 @@ class TabScreen extends Component {
   moviesCategory = ["now_playing", "popular", "top_rated", "upcoming"];
   tvShowCategory = ["airing_today", "on_the_air", "popular", "top_rated"];
 
-  componentDidMount() {
-    this.fetchMovies();
-  }
+  // componentDidMount() {
+  //   this.fetchMovies();
+  // }
 
-  async fetchMovies() {
-    const response = await getMovieList();
-    console.log(response);
+  async fetchMovies(selectedCategory) {
+    const response = await getMovieList(selectedCategory);
+
     this.setState({
       movies: response,
       isLoading: false,
     });
   }
+  async fetchTvShows(selectedCategory) {
+    const response = await getTvShowList(selectedCategory);
+    this.setState({
+      movies: response,
+      isLoading: false,
+    });
+  }
+  movieshandleChangeDropDown = (event) => {
+    this.fetchMovies(event.target.value);
+  };
+  tvShowshandleChangeDropDown = (event) => {
+    this.fetchTvShows(event.target.value);
+  };
   handleChange = (event, newValue) => {
     this.setState({ value: newValue });
   };
@@ -61,12 +74,14 @@ class TabScreen extends Component {
             <Tab label="TV SHOWS" {...this.a11yProps(2)} />
           </Tabs>
         </AppBar>
+
         <TabContainer
           dropDownData={this.moviesCategory}
           value={value}
           isLoading={isLoading}
           movies={movies}
           index={0}
+          onChangeDropdown={this.movieshandleChangeDropDown}
           hasCategoryBar={true}
         ></TabContainer>
         <TabContainer
@@ -78,6 +93,7 @@ class TabScreen extends Component {
           dropDownData={this.tvShowCategory}
           value={value}
           isLoading={isLoading}
+          onChangeDropdown={this.tvShowshandleChangeDropDown}
           movies={movies}
           index={2}
           hasCategoryBar={true}

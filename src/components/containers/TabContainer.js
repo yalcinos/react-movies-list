@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import { withStyles } from "@material-ui/core/styles";
-
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import { getMovieList } from "../../api/api";
 //Import Components
 import MovieList from "../ListItem/MovieList";
-
-//Data manipulation will be here
 
 const TabContainer = (props) => {
   const {
@@ -15,12 +15,13 @@ const TabContainer = (props) => {
     value,
     hasCategoryBar,
     dropDownData,
+    onChangeDropdown,
     movies,
     isLoading,
     index,
     ...other
   } = props;
-
+  console.log(onChangeDropdown);
   return (
     <div
       role="tabpanel"
@@ -29,12 +30,35 @@ const TabContainer = (props) => {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index ? (
-        <MovieList
-          dropDownData={dropDownData}
-          hasCategoryBar={hasCategoryBar}
-          movies={movies}
-        />
+      {value === index && hasCategoryBar ? (
+        <React.Fragment>
+          <FormControl variant="outlined">
+            <InputLabel htmlFor="outlined-age-native-simple">
+              Category
+            </InputLabel>
+            <Select
+              native
+              label="Category"
+              inputProps={{
+                name: "category",
+                id: "outlined-age-native-simple",
+              }}
+              onChange={onChangeDropdown}
+            >
+              <option aria-label="None" value="" />
+              {dropDownData.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
+          <MovieList
+            hasCategoryBar={hasCategoryBar}
+            movies={movies}
+            index={index}
+          />
+        </React.Fragment>
       ) : (
         <MovieList movies={movies} />
       )}
