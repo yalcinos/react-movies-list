@@ -4,7 +4,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 
 const CategoryBar = (props) => {
-  const { data, categoryBarList = [] } = props;
+  const { dropDownData = [] } = props;
 
   return (
     <FormControl variant="outlined">
@@ -18,7 +18,7 @@ const CategoryBar = (props) => {
         }}
       >
         <option aria-label="None" value="" />
-        {categoryBarList.map((category) => (
+        {dropDownData.map((category) => (
           <option key={category} value={category}>
             {category}
           </option>

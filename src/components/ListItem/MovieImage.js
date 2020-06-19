@@ -2,11 +2,10 @@
 import React from "react";
 
 const MovieImage = (props) => {
-  return (
-    <div>
-      <img src={"https://placeimg.com/140/140/any"} />
-    </div>
-  );
+  const { imgUrl } = props;
+  console.log(imgUrl);
+  const imgBaseURL = "https://image.tmdb.org/t/p/w200" + imgUrl;
+  return <img src={imgBaseURL} />;
 };
 
 export default MovieImage;

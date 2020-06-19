@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import MovieList from "../ListItem/MovieList";
+
 import { withStyles } from "@material-ui/core/styles";
 
 //Import Components
-import MovieDetail from "../ListItem/MovieDetail";
-import CategoryBar from "../PageItems/CategoryBar/CategoryBar";
+import MovieList from "../ListItem/MovieList";
+
 //Data manipulation will be here
 
 const TabContainer = (props) => {
@@ -17,6 +15,8 @@ const TabContainer = (props) => {
     value,
     hasCategoryBar,
     dropDownData,
+    movies,
+    isLoading,
     index,
     ...other
   } = props;
@@ -29,33 +29,14 @@ const TabContainer = (props) => {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && !hasCategoryBar ? (
-        <Paper className={classes.paper}>
-          <Grid container spacing={2}>
-            <Grid item>
-              <MovieList className={classes.image} children={children} />
-            </Grid>
-            <Grid item xs={12} sm container>
-              <Grid item xs container direction="column" spacing={3}>
-                <MovieDetail />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Paper>
+      {value === index ? (
+        <MovieList
+          dropDownData={dropDownData}
+          hasCategoryBar={hasCategoryBar}
+          movies={movies}
+        />
       ) : (
-        <Paper className={classes.paper}>
-          <Grid container spacing={2}>
-            <Grid item>
-              <MovieList className={classes.image} children={children} />
-              <CategoryBar categoryBarList={dropDownData} data={"yalcin"} />
-            </Grid>
-            <Grid item xs={12} sm container>
-              <Grid item xs container direction="column" spacing={3}>
-                <MovieDetail />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Paper>
+        <MovieList movies={movies} />
       )}
     </div>
   );

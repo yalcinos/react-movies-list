@@ -14,9 +14,8 @@ import Header from "../../PageItems/Header/Header";
 class TabScreen extends Component {
   state = {
     value: 0,
-    movieData: {},
     movies: [],
-    isloading: true,
+    isLoading: true,
   };
   moviesCategory = ["now_playing", "popular", "top_rated", "upcoming"];
   tvShowCategory = ["airing_today", "on_the_air", "popular", "top_rated"];
@@ -30,6 +29,7 @@ class TabScreen extends Component {
     console.log(response);
     this.setState({
       movies: response,
+      isLoading: false,
     });
   }
   handleChange = (event, newValue) => {
@@ -43,9 +43,9 @@ class TabScreen extends Component {
   };
 
   render() {
-    const { value, movieData, movies, isLoading, dropDownData } = this.state;
+    const { value, movies, isLoading } = this.state;
     const { classes } = this.props;
-    console.log(this.state);
+
     return (
       <div className={classes.root}>
         <Header headLine="React Movie Apps" />
@@ -64,13 +64,21 @@ class TabScreen extends Component {
         <TabContainer
           dropDownData={this.moviesCategory}
           value={value}
+          isLoading={isLoading}
+          movies={movies}
           index={0}
           hasCategoryBar={true}
         ></TabContainer>
-        <TabContainer value={value} index={1}></TabContainer>
+        <TabContainer
+          value={value}
+          hasCategoryBar={false}
+          index={1}
+        ></TabContainer>
         <TabContainer
           dropDownData={this.tvShowCategory}
           value={value}
+          isLoading={isLoading}
+          movies={movies}
           index={2}
           hasCategoryBar={true}
         ></TabContainer>

@@ -2,18 +2,17 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 const MovieDetail = (props) => {
-  const { detail } = props;
+  const { movieData } = props;
   return (
     <Grid item xs>
       <Typography gutterBottom variant="subtitle1">
-        Breaking Bad
+        {movieData.original_title}
       </Typography>
       <Typography variant="body2" gutterBottom>
-        RealseData sadasd | Popularity: 1030114
+        {movieData.release_date} | Popularity: {movieData.popularity}
       </Typography>
       <Typography variant="body2" color="textSecondary">
-        dsfdsdfsfdsfsdjdfsfdskjdsf kjfdskj fdsjkdfsjk dfskjfd skjdfs kj ds dkjs
-        fdskjdfs kjdsfkj fdsjkds fjk dsfjkdfs kj sdfjk fdskjfs d jkdfs
+        {movieData.overview}
       </Typography>
     </Grid>
   );
