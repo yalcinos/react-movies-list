@@ -15,6 +15,8 @@ const TabContainer = (props) => {
     onChangeDropdown,
     movies,
     isLoading,
+    isSearched,
+    errorMsg,
     index,
     ...other
   } = props;
@@ -40,7 +42,7 @@ const TabContainer = (props) => {
           />
         </React.Fragment>
       ) : (
-        <MovieList index={index} movies={movies} />
+        <MovieList isSearched={isSearched} movies={movies} />
       )}
     </div>
   );

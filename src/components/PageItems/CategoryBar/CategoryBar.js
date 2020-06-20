@@ -7,7 +7,7 @@ const CategoryBar = (props) => {
   const { dropDownData = [], onChangeDropdown } = props;
 
   return (
-    <FormControl variant="outlined">
+    <FormControl style={{ marginTop: "30px" }} variant="outlined">
       <InputLabel htmlFor="outlined-age-native-simple">Category</InputLabel>
       <Select
         native

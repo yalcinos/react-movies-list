@@ -7,11 +7,18 @@ import MovieImage from "./MovieImage";
 import MovieDetail from "./MovieDetail";
 
 const MovieList = (props) => {
-  const { classes, children, movies, hasCategoryBar, index } = props;
+  const {
+    classes,
+    children,
+    movies,
+    hasCategoryBar,
+    index,
+    isSearched,
+  } = props;
 
   return (
     <div>
-      {!hasCategoryBar ? (
+      {!hasCategoryBar && isSearched === true ? (
         <Grid container spacing={2}>
           {movies.map((data) => {
             return (
@@ -20,7 +27,7 @@ const MovieList = (props) => {
                   <Grid container spacing={2}>
                     <Grid item>
                       <MovieImage
-                        imgUrl={data.poster_path}
+                        imgUrl={data.poster_path || data.backdrop_path}
                         className={classes.image}
                         children={children}
                       />
@@ -82,7 +89,7 @@ const styles = (theme) => ({
     padding: theme.spacing(2),
     marginTop: "10px",
     margin: "auto",
-    maxWidth: "70%",
+    width: "70%",
   },
   image: {
     width: 128,

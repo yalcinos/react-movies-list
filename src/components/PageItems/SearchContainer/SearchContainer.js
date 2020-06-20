@@ -12,6 +12,7 @@ class SearchBar extends React.Component {
     searchValue: "",
     isLoading: true,
     searchType: "",
+    errorMsg: "",
   };
   constructor(props) {
     super(props);
@@ -31,11 +32,10 @@ class SearchBar extends React.Component {
     );
   }
   render() {
-    const { classes, dropDownData, onSubmitSearch } = this.props;
-    const { searchValue, isLoading, searchType } = this.state;
+    const { classes, dropDownData } = this.props;
 
     return (
-      <div>
+      <div className={classes.root}>
         <TextField
           id="outlined-basic"
           label="Search"
@@ -44,7 +44,7 @@ class SearchBar extends React.Component {
           onChange={this.handleInputChange}
           value={this.state.searchValue}
         />
-        <FormControl variant="outlined">
+        <FormControl style={{ width: "20%" }} variant="outlined">
           <InputLabel htmlFor="outlined-age-native-simple">
             Search Types
           </InputLabel>
@@ -65,7 +65,12 @@ class SearchBar extends React.Component {
             ))}
           </Select>
         </FormControl>
-        <Button onClick={this.handleSubmit} ariant="contained" color="primary">
+        <Button
+          onClick={this.handleSubmit}
+          variant="contained"
+          className={classes.searchButton}
+          color="primary"
+        >
           Search
         </Button>
       </div>
