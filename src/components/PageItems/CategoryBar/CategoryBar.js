@@ -4,7 +4,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 
 const CategoryBar = (props) => {
-  const { dropDownData = [] } = props;
+  const { dropDownData = [], onChangeDropdown } = props;
 
   return (
     <FormControl variant="outlined">
@@ -16,8 +16,8 @@ const CategoryBar = (props) => {
           name: "category",
           id: "outlined-age-native-simple",
         }}
+        onChange={onChangeDropdown}
       >
-        <option aria-label="None" value="" />
         {dropDownData.map((category) => (
           <option key={category} value={category}>
             {category}

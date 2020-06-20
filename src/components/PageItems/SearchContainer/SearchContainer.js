@@ -8,16 +8,41 @@ import Select from "@material-ui/core/Select";
 import searchBarStyle from "./searchBarstyle";
 
 class SearchBar extends React.Component {
+  state = {
+    searchValue: "",
+    isLoading: true,
+    searchType: "",
+  };
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleInputChange = (event) => {
+    this.setState({ searchValue: event.target.value });
+  };
+  handleDropDownChange = (event) => {
+    this.setState({ searchType: event.target.value });
+  };
+  handleSubmit() {
+    return this.props.onSubmitSearch(
+      this.state.searchType,
+      this.state.searchValue
+    );
+  }
   render() {
-    const { classes } = this.props;
-    // console.log(this.props.classes);
+    const { classes, dropDownData, onSubmitSearch } = this.props;
+    const { searchValue, isLoading, searchType } = this.state;
+
     return (
       <div>
         <TextField
           id="outlined-basic"
-          label="Outlined"
+          label="Search"
           variant="outlined"
           className={classes.boxPosition}
+          onChange={this.handleInputChange}
+          value={this.state.searchValue}
         />
         <FormControl variant="outlined">
           <InputLabel htmlFor="outlined-age-native-simple">
@@ -30,14 +55,17 @@ class SearchBar extends React.Component {
               name: "Type",
               id: "outlined-age-native-simple",
             }}
+            onChange={this.handleDropDownChange}
           >
             <option aria-label="None" value="" />
-            <option value={10}>Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
+            {dropDownData.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
           </Select>
         </FormControl>
-        <Button variant="contained" color="primary">
+        <Button onClick={this.handleSubmit} ariant="contained" color="primary">
           Search
         </Button>
       </div>

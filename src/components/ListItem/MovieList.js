@@ -5,33 +5,46 @@ import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import MovieImage from "./MovieImage";
 import MovieDetail from "./MovieDetail";
-import CategoryBar from "../PageItems/CategoryBar/CategoryBar";
 
 const MovieList = (props) => {
   const { classes, children, movies, hasCategoryBar, index } = props;
-  console.log(movies);
 
   return (
     <div>
       {!hasCategoryBar ? (
-        <Paper className={classes.paper}>
-          <Grid container spacing={2}>
-            <Grid item>
-              <MovieImage className={classes.image} children={children} />
-            </Grid>
-            <Grid item xs={12} sm container>
-              <Grid item xs container direction="column" spacing={3}>
-                {" "}
-                Hi~!
-              </Grid>
-            </Grid>
-          </Grid>
-        </Paper>
+        <Grid container spacing={2}>
+          {movies.map((data) => {
+            return (
+              <React.Fragment key={data.id}>
+                <Paper className={classes.paper}>
+                  <Grid container spacing={2}>
+                    <Grid item>
+                      <MovieImage
+                        imgUrl={data.poster_path}
+                        className={classes.image}
+                        children={children}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm container>
+                      <Grid item xs container direction="column" spacing={3}>
+                        <MovieDetail
+                          key={data.popularity}
+                          movieData={data}
+                          index={index}
+                        />
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              </React.Fragment>
+            );
+          })}
+        </Grid>
       ) : (
         <Grid container spacing={2}>
           {movies.map((data) => {
             return (
-              <React.Fragment>
+              <React.Fragment key={data.id}>
                 <Paper className={classes.paper}>
                   <Grid container spacing={2}>
                     <Grid item>

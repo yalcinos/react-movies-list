@@ -1,13 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Select from "@material-ui/core/Select";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import { getMovieList } from "../../api/api";
+
 //Import Components
 import MovieList from "../ListItem/MovieList";
-
+import CategoryBar from "../PageItems/CategoryBar/CategoryBar";
 const TabContainer = (props) => {
   const {
     classes,
@@ -21,7 +18,7 @@ const TabContainer = (props) => {
     index,
     ...other
   } = props;
-  console.log(onChangeDropdown);
+
   return (
     <div
       role="tabpanel"
@@ -32,27 +29,10 @@ const TabContainer = (props) => {
     >
       {value === index && hasCategoryBar ? (
         <React.Fragment>
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="outlined-age-native-simple">
-              Category
-            </InputLabel>
-            <Select
-              native
-              label="Category"
-              inputProps={{
-                name: "category",
-                id: "outlined-age-native-simple",
-              }}
-              onChange={onChangeDropdown}
-            >
-              <option aria-label="None" value="" />
-              {dropDownData.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </Select>
-          </FormControl>
+          <CategoryBar
+            dropDownData={dropDownData}
+            onChangeDropdown={onChangeDropdown}
+          />
           <MovieList
             hasCategoryBar={hasCategoryBar}
             movies={movies}
@@ -60,7 +40,7 @@ const TabContainer = (props) => {
           />
         </React.Fragment>
       ) : (
-        <MovieList movies={movies} />
+        <MovieList index={index} movies={movies} />
       )}
     </div>
   );
