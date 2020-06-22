@@ -14,6 +14,7 @@ class SearchBar extends React.Component {
     searchType: "",
     errorMsg: "",
   };
+
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,6 +22,7 @@ class SearchBar extends React.Component {
 
   handleInputChange = (event) => {
     this.setState({ searchValue: event.target.value });
+    this.typingIndicator();
   };
   handleDropDownChange = (event) => {
     this.setState({ searchType: event.target.value });
@@ -30,6 +32,9 @@ class SearchBar extends React.Component {
       this.state.searchType,
       this.state.searchValue
     );
+  }
+  typingIndicator() {
+    return this.props.typingIndicator("Please initiate a search");
   }
   render() {
     const { classes, dropDownData } = this.props;

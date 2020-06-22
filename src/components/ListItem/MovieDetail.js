@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 
 const MovieDetail = (props) => {
   const { movieData, index } = props;
-  console.log("Movies", movieData);
+  // console.log("Movies", movieData);
   return (
     <div>
       {index === 0 ? (

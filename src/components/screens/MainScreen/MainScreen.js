@@ -50,6 +50,12 @@ class TabScreen extends Component {
       isLoading: false,
     });
   }
+  typingIndicator = (typing) => {
+    this.setState({
+      ...this.state,
+      errorMsg: typing,
+    });
+  };
   submitSearch = async (selectedType, searchResult) => {
     try {
       if (searchResult === "" || selectedType === "") {
@@ -60,7 +66,6 @@ class TabScreen extends Component {
       } else {
         const response = await getSearchResults(selectedType, searchResult);
         if (response.length === 0) {
-          console.log("FAIL REQUEST");
           this.setState({
             ...this.state,
             errorMsg: "There is no Result",
@@ -75,7 +80,6 @@ class TabScreen extends Component {
         }
       }
     } catch (error) {
-      console.log("Error", error);
       searchResult = "";
       this.setState({
         ...this.state,
@@ -128,6 +132,7 @@ class TabScreen extends Component {
         <SearchBarContainer
           onSubmitSearch={this.submitSearch}
           dropDownData={this.searchType}
+          typingIndicator={this.typingIndicator}
         />
         <AppBar position="static">
           <Tabs
