@@ -37,12 +37,12 @@ class TabScreen extends Component {
 
   async fetchMovies(selectedCategory) {
     const response = await getMovieList(selectedCategory);
-
     this.setState({
       movies: response,
       isLoading: false,
     });
   }
+
   async fetchTvShows(selectedCategory) {
     const response = await getTvShowList(selectedCategory);
     this.setState({
@@ -92,6 +92,7 @@ class TabScreen extends Component {
   movieshandleChangeDropDown = (event) => {
     this.fetchMovies(event.target.value);
   };
+
   tvShowshandleChangeDropDown = (event) => {
     this.fetchTvShows(event.target.value);
   };
@@ -159,6 +160,7 @@ class TabScreen extends Component {
               index={0}
               onChangeDropdown={this.movieshandleChangeDropDown}
               hasCategoryBar={true}
+              onPageChange={this.fetchLastMovies}
             />
             {errorMsg !== "" ? (
               <h2>{errorMsg}</h2>

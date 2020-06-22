@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-
 //Import Components
 import MovieList from "../ListItem/MovieList";
 import CategoryBar from "../PageItems/CategoryBar/CategoryBar";
@@ -18,6 +17,7 @@ const TabContainer = (props) => {
     isSearched,
     errorMsg,
     index,
+    onPageChange,
     ...other
   } = props;
 
