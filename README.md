@@ -8,15 +8,13 @@
 
 ## Installation
 
-OS X & Linux:
-
 ```sh
 npm install
 npm start
 ```
 ## Development setup
 
-Create config folder inside of /src folder and create api_config.js. Paste the below code and add your **MOVIE DB API :KEY**
+Create config folder inside of /src folder and create api_config.js. Paste the below code and add your **MOVIE DB API KEY**
 
 ```sh
 import axios from "axios";
@@ -35,3 +33,4 @@ export const SEARCH_URL = axios.create({
 });
 
 ```
+This app was built using [MOIVE DB API](https://developers.themoviedb.org/3/getting-started/introduction).
